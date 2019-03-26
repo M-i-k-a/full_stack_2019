@@ -9,17 +9,21 @@ const Statistics = (props) => {
   if (props.goodValue > 0 || props.neutralValue > 0 || props.badValue) {
     return (
       <div>
-        <p>hyvä {props.goodValue}</p>
-        <p>neutraali {props.neutralValue}</p>
-        <p>huono {props.badValue}</p>
-        <p>yhteensä {props.goodValue + props.neutralValue + props.badValue}</p>
-        <p>keskiarvo {(props.goodValue - props.badValue) / 2}</p>
-        <p>positiivisia {props.goodValue / (props.goodValue + props.neutralValue + props.badValue) * 100} %</p>
+        <Statistic text='hyvä' value={props.goodValue}/>
+        <Statistic text='neutraali' value={props.neutralValue}/>
+        <Statistic text='huono' value={props.badValue}/>
+        <Statistic text='yhteensä' value={props.goodValue + props.neutralValue + props.badValue}/>
+        <Statistic text='keskiarvo' value={(props.goodValue - props.badValue) / 2}/>
+        <Statistic text='positiivisia' value={props.goodValue / (props.goodValue + props.neutralValue + props.badValue) * 100} symbol='%' />
       </div>
     )
   } else return (<div>Ei yhtään palautetta annettu</div>)
-  
-  
+}
+
+const Statistic = (props) => {
+  return (
+    <div>{props.text} {props.value} {props.symbol}</div>
+  )
 }
 
 const App = () => {
