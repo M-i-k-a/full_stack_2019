@@ -5,6 +5,19 @@ const Button = (props) => (
   <button onClick={props.handleClick}>{props.text}</button>
 )
 
+const Statistics = (props) => {
+  return (
+    <div>
+      <p>hyvä {props.goodValue}</p>
+      <p>neutraali {props.neutralValue}</p>
+      <p>huono {props.badValue}</p>
+      <p>yhteensä {props.goodValue + props.neutralValue + props.badValue}</p>
+      <p>keskiarvo {(props.goodValue - props.badValue) / 2}</p>
+      <p>positiivisia {props.goodValue / (props.goodValue + props.neutralValue + props.badValue) * 100} %</p>
+    </div>
+  )
+}
+
 const App = () => {
 
   const [goodValue, setGoodValue] = useState(0)
@@ -28,13 +41,8 @@ const App = () => {
       <Button handleClick={() => setBadToValue(badValue + 1)} text="huono" />
       <Button handleClick={() => setNeutralToValue(neutralValue + 1)} text="huono" />
       <div>
-      <h2>Statistiikka</h2>
-        <p>hyvä {goodValue}</p>
-        <p>neutraali {neutralValue}</p>
-        <p>huono {badValue}</p>
-        <p>yhteensä {goodValue + neutralValue + badValue}</p>
-        <p>keskiarvo {(goodValue - badValue) / 2}</p>
-        <p>positiivisia {goodValue / (goodValue + neutralValue + badValue) * 100} %</p>
+        <h2>Statistiikka</h2>
+        <Statistics  goodValue={goodValue} badValue={badValue} neutralValue={neutralValue}/>
       </div>
     </div>
   )
