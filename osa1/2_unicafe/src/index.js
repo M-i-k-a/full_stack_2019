@@ -6,16 +6,20 @@ const Button = (props) => (
 )
 
 const Statistics = (props) => {
-  return (
-    <div>
-      <p>hyvä {props.goodValue}</p>
-      <p>neutraali {props.neutralValue}</p>
-      <p>huono {props.badValue}</p>
-      <p>yhteensä {props.goodValue + props.neutralValue + props.badValue}</p>
-      <p>keskiarvo {(props.goodValue - props.badValue) / 2}</p>
-      <p>positiivisia {props.goodValue / (props.goodValue + props.neutralValue + props.badValue) * 100} %</p>
-    </div>
-  )
+  if (props.goodValue > 0 || props.neutralValue > 0 || props.badValue) {
+    return (
+      <div>
+        <p>hyvä {props.goodValue}</p>
+        <p>neutraali {props.neutralValue}</p>
+        <p>huono {props.badValue}</p>
+        <p>yhteensä {props.goodValue + props.neutralValue + props.badValue}</p>
+        <p>keskiarvo {(props.goodValue - props.badValue) / 2}</p>
+        <p>positiivisia {props.goodValue / (props.goodValue + props.neutralValue + props.badValue) * 100} %</p>
+      </div>
+    )
+  } else return (<div>Ei yhtään palautetta annettu</div>)
+  
+  
 }
 
 const App = () => {
