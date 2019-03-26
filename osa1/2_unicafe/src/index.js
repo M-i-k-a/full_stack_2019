@@ -9,12 +9,16 @@ const Statistics = (props) => {
   if (props.goodValue > 0 || props.neutralValue > 0 || props.badValue) {
     return (
       <div>
-        <Statistic text='hyvä' value={props.goodValue}/>
-        <Statistic text='neutraali' value={props.neutralValue}/>
-        <Statistic text='huono' value={props.badValue}/>
-        <Statistic text='yhteensä' value={props.goodValue + props.neutralValue + props.badValue}/>
-        <Statistic text='keskiarvo' value={(props.goodValue - props.badValue) / 2}/>
-        <Statistic text='positiivisia' value={props.goodValue / (props.goodValue + props.neutralValue + props.badValue) * 100} symbol='%' />
+        <table>
+          <tbody>
+          <Statistic text='hyvä' value={props.goodValue}/>
+          <Statistic text='neutraali' value={props.neutralValue}/>
+          <Statistic text='huono' value={props.badValue}/>
+          <Statistic text='yhteensä' value={props.goodValue + props.neutralValue + props.badValue}/>
+          <Statistic text='keskiarvo' value={(props.goodValue - props.badValue) / (props.goodValue + props.neutralValue + props.badValue)}/>
+          <Statistic text='positiivisia' value={props.goodValue / (props.goodValue + props.neutralValue + props.badValue) * 100} symbol='%' />
+          </tbody>
+        </table>
       </div>
     )
   } else return (<div>Ei yhtään palautetta annettu</div>)
@@ -22,7 +26,9 @@ const Statistics = (props) => {
 
 const Statistic = (props) => {
   return (
-    <div>{props.text} {props.value} {props.symbol}</div>
+      <tr>
+        <td>{props.text}</td><td>{props.value} {props.symbol}</td>
+      </tr>
   )
 }
 
@@ -46,8 +52,8 @@ const App = () => {
     <div>
       <h2>Anna palautetta</h2>
       <Button handleClick={() => setGoodToValue(goodValue + 1)} text="hyvä" />
+      <Button handleClick={() => setNeutralToValue(neutralValue + 1)} text="neutraali" />
       <Button handleClick={() => setBadToValue(badValue + 1)} text="huono" />
-      <Button handleClick={() => setNeutralToValue(neutralValue + 1)} text="huono" />
       <div>
         <h2>Statistiikka</h2>
         <Statistics  goodValue={goodValue} badValue={badValue} neutralValue={neutralValue}/>
